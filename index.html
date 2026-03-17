@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Virtual Kala Fest'26 – Fine Arts Club, NEC</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Nunito:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#faf8f4;
+  --bg2:#f3f0e8;
+  --ink:#1e1040;
+  --ink2:#2d1f6e;
+  --ink3:#6b5fa0;
+  --red:#e8293b;
+  --orange:#f97316;
+  --yellow:#f5c518;
+  --green:#22c55e;
+  --blue:#2563eb;
+  --violet:#7c3aed;
+  --pink:#ec4899;
+  --teal:#0d9488;
+  --border:#e2ddd4;
+  --shadow:rgba(30,16,64,0.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;}
+
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.022;
+}
+canvas#confetti{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:200;
+  padding:14px 40px;
+  display:grid;grid-template-columns:68px 1fr 68px;align-items:center;gap:14px;
+  background:rgba(250,248,244,0.94);backdrop-filter:blur(18px);
+  border-bottom:2px solid var(--border);
+  box-shadow:0 2px 20px var(--shadow);
+  animation:slideDown 0.7s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes slideDown{from{transform:translateY(-60px);opacity:0;}to{transform:none;opacity:1;}}
+.hlogo{display:flex;align-items:center;justify-content:center;}
+.hlogo.r{justify-content:flex-end;}
+.hlogo img{
+  width:58px;height:58px;border-radius:50%;object-fit:cover;
+  border:2px solid var(--border);background:#fff;
+  box-shadow:0 4px 14px var(--shadow);
+  transition:transform 0.4s cubic-bezier(.22,1,.36,1),box-shadow 0.4s;
+}
+.hlogo img:hover{transform:scale(1.1) rotate(8deg);box-shadow:0 6px 22px rgba(124,58,237,0.25);}
+.hcol{text-align:center;}
+.hcol h1{font-family:'Fraunces',serif;font-size:0.95rem;font-weight:700;color:#1e1040;letter-spacing:0.2px;}
+.hcol p{font-size:0.6rem;color:var(--ink3);margin-top:2px;}
+
+/* TICKER */
+.ticker-wrap{overflow:hidden;height:40px;display:flex;align-items:center;background:linear-gradient(90deg,#1e1040,#2d1f6e,#1e1040);background-size:300% 100%;animation:tickBg 8s linear infinite;position:relative;z-index:10;}
+@keyframes tickBg{0%{background-position:0%}100%{background-position:300%}}
+.ticker{display:flex;white-space:nowrap;animation:tickScroll 30s linear infinite;}
+.ticker span{font-size:0.7rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;padding:0 24px;}
+.ticker span::after{content:'◆';margin-left:24px;opacity:0.35;}
+.t1{color:#f97316;}.t2{color:#f5c518;}.t3{color:#22c55e;}.t4{color:#ec4899;}.t5{color:#38bdf8;}
+@keyframes tickScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* HERO */
+.hero{
+  min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:110px 24px 80px;position:relative;z-index:1;overflow:hidden;
+}
+.hc{position:absolute;border-radius:50%;pointer-events:none;}
+.hc1{width:700px;height:700px;top:-200px;right:-200px;background:radial-gradient(circle,rgba(249,115,22,0.08),transparent 65%);}
+.hc2{width:600px;height:600px;bottom:-150px;left:-150px;background:radial-gradient(circle,rgba(124,58,237,0.07),transparent 65%);}
+.hc3{width:350px;height:350px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(245,197,24,0.06),transparent 70%);}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,#1e1040,#4c1d95);color:#fff;
+  font-size:0.68rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;
+  padding:8px 22px;border-radius:6px;margin-bottom:32px;
+  animation:fadeUp 0.7s 0.2s both;
+}
+.pd{width:7px;height:7px;background:var(--yellow);border-radius:50%;animation:pdAnim 1.5s ease infinite;}
+@keyframes pdAnim{0%,100%{transform:scale(1);}50%{transform:scale(1.8);opacity:0.4;}}
+
+.hero h2{
+  font-family:'Fraunces',serif;
+  font-size:clamp(3.6rem,11vw,8rem);font-weight:900;line-height:0.95;
+  color:#1e1040;letter-spacing:-2px;
+  animation:fadeUp 0.7s 0.35s both;
+}
+.h2-outline{-webkit-text-stroke:2.5px #1e1040;color:transparent;}
+.h2-orange{color:var(--orange);}
+.h2-violet{color:var(--violet);}
+
+.fest-sub{
+  display:block;font-family:'Fraunces',serif;
+  font-size:clamp(1.1rem,3vw,1.7rem);font-weight:700;font-style:italic;
+  color:var(--ink3);margin-top:12px;
+  animation:fadeUp 0.7s 0.5s both;
+}
+.vtag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--yellow);color:#1e1040;
+  font-size:0.75rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  padding:7px 18px;border-radius:6px;margin-top:24px;
+  box-shadow:4px 4px 0 #1e1040;
+  animation:fadeUp 0.7s 0.55s both;
+}
+
+.meta-row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:36px;animation:fadeUp 0.7s 0.65s both;}
+.mpill{
+  display:flex;align-items:center;gap:8px;
+  background:#fff;border:2px solid var(--border);
+  color:var(--ink2);padding:9px 18px;border-radius:8px;
+  font-size:0.83rem;font-weight:700;
+  box-shadow:3px 3px 0 var(--border);
+  transition:all 0.22s cubic-bezier(.22,1,.36,1);
+}
+.mpill:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 #1e1040;}
+
+.cta-row{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:42px;animation:fadeUp 0.7s 0.78s both;}
+.cta-main{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 42px;border-radius:8px;
+  background:linear-gradient(135deg,#1e1040,#4c1d95);color:#fff;
+  font-size:0.95rem;font-weight:800;text-decoration:none;letter-spacing:0.3px;
+  box-shadow:5px 5px 0 var(--orange);
+  transition:all 0.2s cubic-bezier(.22,1,.36,1);
+  position:relative;overflow:hidden;
+}
+.cta-main::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.1);transform:translateX(-100%);animation:sweep 2.5s linear infinite;}
+@keyframes sweep{0%{transform:translateX(-100%);}100%{transform:translateX(200%);}}
+.cta-main:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--orange);}
+.cta-sec{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:16px 32px;border-radius:8px;
+  background:#fff;border:2px solid var(--border);
+  color:var(--ink);font-size:0.9rem;font-weight:700;text-decoration:none;
+  box-shadow:4px 4px 0 var(--border);transition:all 0.2s;
+}
+.cta-sec:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--violet);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:none;}}
+
+/* SECTION */
+.section{max-width:1160px;margin:0 auto;padding:80px 40px;position:relative;z-index:1;}
+.sec-kicker{
+  display:inline-block;font-family:'Space Mono',monospace;
+  font-size:0.62rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;
+  color:#fff;background:linear-gradient(135deg,#1e1040,#4c1d95);padding:5px 14px;border-radius:4px;margin-bottom:14px;
+}
+.sec-title{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--ink);line-height:1.05;margin-bottom:8px;}
+.sec-desc{font-size:0.9rem;color:var(--ink3);margin-bottom:48px;max-width:480px;font-weight:500;}
+
+/* DIVIDER */
+.divider{height:2px;background:var(--border);position:relative;z-index:1;}
+.div-accent{height:2px;width:120px;background:linear-gradient(90deg,var(--orange),var(--pink));}
+
+/* RULES */
+.rules-box{
+  background:#fff;border:2px solid var(--border);border-radius:20px;padding:40px;
+  box-shadow:6px 6px 0 var(--border);
+  opacity:0;transform:translateY(36px);transition:opacity 0.6s,transform 0.6s;
+  position:relative;overflow:hidden;
+}
+.rules-box.visible{opacity:1;transform:none;}
+.rules-box::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--green),var(--blue),var(--violet),var(--pink));
+}
+.rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;}
+.rule-item{
+  display:flex;align-items:flex-start;gap:12px;
+  background:var(--bg2);border:1.5px solid var(--border);
+  border-radius:10px;padding:13px 15px;transition:all 0.22s;
+}
+.rule-item:hover{background:#fff;border-color:var(--orange);transform:translateY(-2px);box-shadow:0 6px 18px var(--shadow);}
+.rnum{
+  font-family:'Space Mono',monospace;font-size:0.6rem;font-weight:700;
+  background:linear-gradient(135deg,#1e1040,#4c1d95);color:#fff;border-radius:5px;padding:3px 8px;flex-shrink:0;margin-top:1px;
+}
+.rtext{font-size:0.83rem;color:var(--ink2);line-height:1.55;font-weight:600;}
+
+/* EVENTS */
+.events-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;}
+
+.ev-card{
+  background:#fff;border:2px solid var(--border);border-radius:20px;
+  overflow:hidden;cursor:pointer;
+  opacity:0;transform:translateY(44px);
+  transition:opacity 0.5s,transform 0.5s,box-shadow 0.3s,border-color 0.3s;
+  position:relative;
+}
+.ev-card.visible{opacity:1;transform:none;}
+.ev-card:hover{transform:translateY(-8px);box-shadow:0 24px 56px rgba(26,18,8,0.13);}
+
+.ev-band{height:6px;width:100%;}
+.ev-card:nth-child(1) .ev-band{background:linear-gradient(90deg,#e8293b,#f97316);}
+.ev-card:nth-child(2) .ev-band{background:linear-gradient(90deg,#ec4899,#7c3aed);}
+.ev-card:nth-child(3) .ev-band{background:linear-gradient(90deg,#f59e0b,#22c55e);}
+.ev-card:nth-child(4) .ev-band{background:linear-gradient(90deg,#2563eb,#0d9488);}
+.ev-card:nth-child(5) .ev-band{background:linear-gradient(90deg,#7c3aed,#ec4899);}
+.ev-card:nth-child(6) .ev-band{background:linear-gradient(90deg,#0d9488,#2563eb);}
+.ev-card:nth-child(7) .ev-band{background:linear-gradient(90deg,#f97316,#f5c518);}
+
+.ev-body{padding:26px 24px 24px;}
+
+.ev-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;}
+.ev-emoji{
+  font-size:2.2rem;line-height:1;flex-shrink:0;
+  width:54px;height:54px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform 0.4s cubic-bezier(.22,1,.36,1);
+}
+.ev-card:hover .ev-emoji{transform:scale(1.2) rotate(-8deg);}
+.ev-card:nth-child(1) .ev-emoji{background:rgba(232,41,59,0.09);}
+.ev-card:nth-child(2) .ev-emoji{background:rgba(236,72,153,0.09);}
+.ev-card:nth-child(3) .ev-emoji{background:rgba(245,158,11,0.09);}
+.ev-card:nth-child(4) .ev-emoji{background:rgba(37,99,235,0.09);}
+.ev-card:nth-child(5) .ev-emoji{background:rgba(124,58,237,0.09);}
+.ev-card:nth-child(6) .ev-emoji{background:rgba(13,148,136,0.09);}
+.ev-card:nth-child(7) .ev-emoji{background:rgba(249,115,22,0.09);}
+
+.ev-titles{flex:1;}
+.ev-name{
+  font-family:'Fraunces',serif;font-size:1.55rem;font-weight:900;
+  line-height:1.05;margin-bottom:4px;
+  background-size:300% 100%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:nameShimmer 4s linear infinite;
+}
+@keyframes nameShimmer{0%{background-position:0%}100%{background-position:300%}}
+
+/* Each card gets its own gradient for the name */
+.ev-card:nth-child(1) .ev-name{background-image:linear-gradient(90deg,#e8293b,#f97316,#e8293b,#f97316);}
+.ev-card:nth-child(2) .ev-name{background-image:linear-gradient(90deg,#ec4899,#7c3aed,#ec4899,#7c3aed);}
+.ev-card:nth-child(3) .ev-name{background-image:linear-gradient(90deg,#f59e0b,#22c55e,#f59e0b,#22c55e);}
+.ev-card:nth-child(4) .ev-name{background-image:linear-gradient(90deg,#2563eb,#0d9488,#2563eb,#0d9488);}
+.ev-card:nth-child(5) .ev-name{background-image:linear-gradient(90deg,#7c3aed,#ec4899,#7c3aed,#ec4899);}
+.ev-card:nth-child(6) .ev-name{background-image:linear-gradient(90deg,#0d9488,#2563eb,#0d9488,#2563eb);}
+.ev-card:nth-child(7) .ev-name{background-image:linear-gradient(90deg,#f97316,#f5c518,#f97316,#f5c518);}
+
+.ev-subtitle{font-size:0.72rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);}
+
+.ev-rules-list{list-style:none;margin-bottom:20px;}
+.ev-rules-list li{
+  display:flex;align-items:flex-start;gap:9px;
+  font-size:0.82rem;color:var(--ink2);font-weight:600;
+  padding:7px 0;border-bottom:1px solid var(--border);line-height:1.4;
+}
+.ev-rules-list li:last-child{border-bottom:none;}
+.ldot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.ev-card:nth-child(1) .ldot{background:var(--red);}
+.ev-card:nth-child(2) .ldot{background:var(--pink);}
+.ev-card:nth-child(3) .ldot{background:var(--yellow);}
+.ev-card:nth-child(4) .ldot{background:var(--blue);}
+.ev-card:nth-child(5) .ldot{background:var(--violet);}
+.ev-card:nth-child(6) .ldot{background:var(--teal);}
+.ev-card:nth-child(7) .ldot{background:var(--orange);}
+
+.ev-reg{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  width:100%;padding:12px 20px;border-radius:10px;
+  font-size:0.84rem;font-weight:800;text-decoration:none;
+  border:2px solid transparent;
+  transition:all 0.2s cubic-bezier(.22,1,.36,1);
+  letter-spacing:0.3px;
+}
+.ev-card:nth-child(1) .ev-reg{background:var(--red);color:#fff;border-color:var(--red);box-shadow:4px 4px 0 rgba(232,41,59,0.18);}
+.ev-card:nth-child(1) .ev-reg:hover{background:#fff;color:var(--red);box-shadow:5px 5px 0 var(--red);}
+.ev-card:nth-child(2) .ev-reg{background:var(--pink);color:#fff;border-color:var(--pink);box-shadow:4px 4px 0 rgba(236,72,153,0.18);}
+.ev-card:nth-child(2) .ev-reg:hover{background:#fff;color:var(--pink);box-shadow:5px 5px 0 var(--pink);}
+.ev-card:nth-child(3) .ev-reg{background:var(--yellow);color:var(--ink);border-color:var(--yellow);box-shadow:4px 4px 0 rgba(245,197,24,0.28);}
+.ev-card:nth-child(3) .ev-reg:hover{background:#fff;color:var(--ink);border-color:var(--ink);box-shadow:5px 5px 0 var(--ink);}
+.ev-card:nth-child(4) .ev-reg{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:4px 4px 0 rgba(37,99,235,0.18);}
+.ev-card:nth-child(4) .ev-reg:hover{background:#fff;color:var(--blue);box-shadow:5px 5px 0 var(--blue);}
+.ev-card:nth-child(5) .ev-reg{background:var(--violet);color:#fff;border-color:var(--violet);box-shadow:4px 4px 0 rgba(124,58,237,0.18);}
+.ev-card:nth-child(5) .ev-reg:hover{background:#fff;color:var(--violet);box-shadow:5px 5px 0 var(--violet);}
+.ev-card:nth-child(6) .ev-reg{background:var(--teal);color:#fff;border-color:var(--teal);box-shadow:4px 4px 0 rgba(13,148,136,0.18);}
+.ev-card:nth-child(6) .ev-reg:hover{background:#fff;color:var(--teal);box-shadow:5px 5px 0 var(--teal);}
+.ev-card:nth-child(7) .ev-reg{background:var(--orange);color:#fff;border-color:var(--orange);box-shadow:4px 4px 0 rgba(249,115,22,0.18);}
+.ev-card:nth-child(7) .ev-reg:hover{background:#fff;color:var(--orange);box-shadow:5px 5px 0 var(--orange);}
+
+/* SUBMIT BANNER */
+.submit-banner{
+  background:linear-gradient(135deg,#1e1040,#2d1f6e);border-radius:24px;padding:52px 48px;
+  display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between;
+  opacity:0;transform:translateY(36px);transition:opacity 0.6s,transform 0.6s;
+  position:relative;overflow:hidden;
+}
+.submit-banner.visible{opacity:1;transform:none;}
+.submit-banner::before{
+  content:'SUBMIT';position:absolute;right:-20px;top:50%;transform:translateY(-50%);
+  font-family:'Fraunces',serif;font-size:11rem;font-weight:900;
+  color:rgba(255,255,255,0.03);pointer-events:none;line-height:1;letter-spacing:-5px;
+}
+.sb-left{flex:1;min-width:200px;position:relative;z-index:1;}
+.sb-left h3{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:900;color:#fff;margin-bottom:10px;}
+.sb-left p{font-size:0.9rem;color:rgba(250,248,244,0.5);line-height:1.7;font-weight:500;}
+.sb-steps{display:flex;flex-direction:column;gap:12px;min-width:200px;position:relative;z-index:1;}
+.sb-step{
+  display:flex;align-items:center;gap:14px;
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;padding:13px 16px;transition:background 0.22s;
+}
+.sb-step:hover{background:rgba(255,255,255,0.1);}
+.snum{
+  font-family:'Space Mono',monospace;font-size:0.75rem;font-weight:700;
+  color:#1e1040;background:var(--yellow);
+  width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.sb-step span{font-size:0.85rem;color:rgba(250,248,244,0.75);font-weight:600;}
+
+/* FOOTER */
+footer{
+  background:linear-gradient(135deg,#1e1040,#2d1f6e);border-top:3px solid var(--orange);
+  text-align:center;padding:44px 24px;
+  font-size:0.82rem;line-height:2;color:rgba(250,248,244,0.4);
+  position:relative;z-index:1;
+}
+footer strong{color:rgba(250,248,244,0.9);}
+.frainbow{display:block;width:80px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--green),var(--blue),var(--violet));margin:0 auto 20px;}
+
+@media(max-width:640px){
+  header{grid-template-columns:48px 1fr 48px;padding:12px 14px;gap:8px;}
+  .hlogo img{width:44px;height:44px;}
+  .section{padding:60px 20px;}
+  .submit-banner{padding:30px 22px;}
+  .rules-box{padding:24px 18px;}
+  .ev-body{padding:20px 18px 18px;}
+  .events-grid{gap:16px;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<header>
+  <div class="hlogo"><img src="nec.jpeg" alt="NEC"/></div>
+  <div class="hcol">
+    <h1>NATIONAL ENGINEERING COLLEGE</h1>
+    <p>K.R. Nagar, Kovilpatti – 628 503 &nbsp;|&nbsp; Affiliated to Anna University, Chennai</p>
+  </div>
+  <div class="hlogo r"><img src="fac.jpeg" alt="Fine Arts Club"/></div>
+</header>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="t1">Fine Arts Club</span><span class="t2">Virtual Kala Fest'26</span><span class="t3">Online Submission</span><span class="t4">7 Events</span><span class="t5">Showcase Your Talent</span><span class="t1">NEC Students Only</span>
+    <span class="t1">Fine Arts Club</span><span class="t2">Virtual Kala Fest'26</span><span class="t3">Online Submission</span><span class="t4">7 Events</span><span class="t5">Showcase Your Talent</span><span class="t1">NEC Students Only</span>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hc hc1"></div>
+  <div class="hc hc2"></div>
+  <div class="hc hc3"></div>
+
+  <div class="hero-eyebrow"><div class="pd"></div>&nbsp;Fine Arts Club Presents</div>
+
+  <h2>
+    <span class="h2-outline">Virtual</span><br/>
+    <span class="h2-orange">Kala</span> <span class="h2-violet">Fest</span><span class="h2-orange">'26</span>
+  </h2>
+  <span class="fest-sub">Perform &nbsp;·&nbsp; Submit &nbsp;·&nbsp; Celebrate &nbsp;·&nbsp; From Anywhere</span>
+  <div class="vtag">📩 Online Video / Photo Submission Event</div>
+
+  <div class="meta-row">
+    <div class="mpill">🎓 NEC Students Only</div>
+    <div class="mpill">⏱️ 2–3 Min Per Event</div>
+    <div class="mpill">🏆 7 Unique Events</div>
+    <div class="mpill">⚖️ Judges' Decision Final</div>
+  </div>
+
+  <div class="cta-row">
+    <a href="#events" class="cta-main">🎭 See All Events →</a>
+    <a href="#rules" class="cta-sec">📋 General Rules</a>
+  </div>
+</section>
+
+<div class="divider"><div class="div-accent"></div></div>
+
+<div class="section" id="rules">
+  <div class="sec-kicker">Before You Begin</div>
+  <div class="sec-title">General Rules</div>
+  <p class="sec-desc">Applicable to every participant across all events. Read thoroughly before submitting.</p>
+  <div class="rules-box" id="rules-box">
+    <div class="rules-grid">
+      <div class="rule-item"><span class="rnum">01</span><span class="rtext">Competition conducted virtually through video / photo submission 📩</span></div>
+      <div class="rule-item"><span class="rnum">02</span><span class="rtext">Participants must be currently enrolled students of the institution</span></div>
+      <div class="rule-item"><span class="rnum">03</span><span class="rtext">Time limit for all performance events: strictly 2–3 minutes</span></div>
+      <div class="rule-item"><span class="rnum">04</span><span class="rtext">Videos must be clear, properly lit and properly visible</span></div>
+      <div class="rule-item"><span class="rnum">05</span><span class="rtext">Excessive editing, filters, or special effects are not allowed</span></div>
+      <div class="rule-item"><span class="rnum">06</span><span class="rtext">Participants must ensure good audio and video quality</span></div>
+      <div class="rule-item"><span class="rnum">07</span><span class="rtext">Content must be original — not copied from others</span></div>
+      <div class="rule-item"><span class="rnum">08</span><span class="rtext">No inappropriate language, vulgarity, or offensive content 🚫</span></div>
+      <div class="rule-item"><span class="rnum">09</span><span class="rtext">All submissions must be sent before the deadline</span></div>
+      <div class="rule-item"><span class="rnum">10</span><span class="rtext">Judges' decision will be final and binding</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><div class="div-accent" style="background:linear-gradient(90deg,var(--violet),var(--pink));"></div></div>
+
+<div class="section" id="events">
+  <div class="sec-kicker">Competition Events</div>
+  <div class="sec-title">Choose Your Stage</div>
+  <p class="sec-desc">Seven events, one Google Form each — click Register on your event to sign up.</p>
+
+  <div class="events-grid">
+
+    <div class="ev-card">
+      <div class="ev-band"></div>
+      <div class="ev-body">
+        <div class="ev-header">
+          <div class="ev-emoji">🎤</div>
+          <div class="ev-titles">
+            <div class="ev-name">Mic Drop</div>
+            <div class="ev-subtitle">Solo Singing</div>
+          </div>
+        </div>
+        <ul class="ev-rules-list">
+          <li><span class="ldot"></span>Time limit: 2–3 minutes</li>
+          <li><span class="ldot"></span>Any language song is allowed</li>
+          <li><span class="ldot"></span>Karaoke / background music allowed</li>
+          <li><span class="ldot"></span>Lip-syncing is strictly not allowed</li>
+        </ul>
+        <a href="FORM_LINK_1" target="_blank" class="ev-reg">✍️ Register Now →</a>
+      </div>
+    </div>
+
+    <div class="ev-card">
+      <div class="ev-band"></div>
+      <div class="ev-body">
+        <div class="ev-header">
+          <div class="ev-emoji">💃</div>
+          <div class="ev-titles">
+            <div class="ev-name">Beat Breaker</div>
+            <div class="ev-subtitle">Solo Western Dance</div>
+          </div>
+        </div>
+        <ul class="ev-rules-list">
+          <li><span class="ldot"></span>Time limit: 2–3 minutes</li>
+          <li><span class="ldot"></span>Any western dance style allowed</li>
+          <li><span class="ldot"></span>Performance must be solo</li>
+        </ul>
+        <a href="FORM_LINK_2" target="_blank" class="ev-reg">✍️ Register Now →</a>
+      </div>
+    </div>
+
+    <div class="ev-card">
+      <div class="ev-band"></div>
+      <div class="ev-body">
+        <div class="ev-header">
+          <div class="ev-emoji">🪔</div>
+          <div class="ev-titles">
+            <div class="ev-name">Nritya Utsav</div>
+            <div class="ev-subtitle">Solo Classical Dance</div>
+          </div>
+        </div>
+        <ul class="ev-rules-list">
+          <li><span class="ldot"></span>Time limit: 2–3 minutes</li>
+          <li><span class="ldot"></span>Any classical dance form allowed</li>
+          <li><span class="ldot"></span>Costume and expressions are encouraged</li>
+        </ul>
+        <a href="FORM_LINK_3" target="_blank" class="ev-reg">✍️ Register Now →</a>
+      </div>
+    </div>
+
+    <div class="ev-card">
+      <div class="ev-band"></div>
+      <div class="ev-body">
+        <div class="ev-header">
+          <div class="ev-emoji">🎸</div>
+          <div class="ev-titles">
+            <div class="ev-name">String Storm</div>
+            <div class="ev-subtitle">Solo Instrumental</div>
+          </div>
+        </div>
+        <ul class="ev-rules-list">
+          <li><span class="ldot"></span>Time limit: 2–3 minutes</li>
+          <li><span class="ldot"></span>Any musical instrument can be used</li>
+          <li><span class="ldot"></span>Classical or modern music allowed</li>
+        </ul>
+        <a href="FORM_LINK_4" target="_blank" class="ev-reg">✍️ Register Now →</a>
+      </div>
+    </div>
+
+    <div class="ev-card">
+      <div class="ev-band"></div>
+      <div class="ev-body">
+        <div class="ev-header">
+          <div class="ev-emoji">🕺</div>
+          <div class="ev-titles">
+            <div class="ev-name">Groove Squad</div>
+            <div class="ev-subtitle">Group Dance</div>
+          </div>
+        </div>
+        <ul class="ev-rules-list">
+          <li><span class="ldot"></span>4 members per team</li>
+          <li><span class="ldot"></span>Time limit: 2–3 minutes</li>
+          <li><span class="ldot"></span>All members must be visible in the video</li>
+        </ul>
+        <a href="FORM_LINK_5" target="_blank" class="ev-reg">✍️ Register Now →</a>
+      </div>
+    </div>
+
+    <div class="ev-card">
+      <div class="ev-band"></div>
+      <div class="ev-body">
+        <div class="ev-header">
+          <div class="ev-emoji">💇</div>
+          <div class="ev-titles">
+            <div class="ev-name">Floral Fantasy</div>
+            <div class="ev-subtitle">Hair Dressing</div>
+          </div>
+        </div>
+        <ul class="ev-rules-list">
+          <li><span class="ldot"></span>Time limit: 2–3 minutes video</li>
+          <li><span class="ldot"></span>Showcase your hairstyling creativity</li>
+          <li><span class="ldot"></span>Floral or thematic styling encouraged</li>
+        </ul>
+        <a href="FORM_LINK_6" target="_blank" class="ev-reg">✍️ Register Now →</a>
+      </div>
+    </div>
+
+    <div class="ev-card">
+      <div class="ev-band"></div>
+      <div class="ev-body">
+        <div class="ev-header">
+          <div class="ev-emoji">✨</div>
+          <div class="ev-titles">
+            <div class="ev-name">Talent Spark</div>
+            <div class="ev-subtitle">Special Talent</div>
+          </div>
+        </div>
+        <ul class="ev-rules-list">
+          <li><span class="ldot"></span>Time limit: 2–3 minutes</li>
+          <li><span class="ldot"></span>Any unique talent not in other events</li>
+          <li><span class="ldot"></span>Judged on creativity, uniqueness & presentation</li>
+          <li><span class="ldot"></span>e.g. Beatboxing, Comedy, Magic, Mimicry, Poetry, Whistling</li>
+        </ul>
+        <a href="FORM_LINK_7" target="_blank" class="ev-reg">✍️ Register Now →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"><div class="div-accent" style="background:linear-gradient(90deg,var(--teal),var(--green));"></div></div>
+
+<div class="section">
+  <div class="submit-banner" id="sb">
+    <div class="sb-left">
+      <h3>How to Submit</h3>
+      <p>Record your performance, pick the right Google Form, fill in your details and upload. All within 2–3 minutes of content. Late entries will not be considered.</p>
+    </div>
+    <div class="sb-steps">
+      <div class="sb-step"><span class="snum">1</span><span>🎬 Record a clear, well-lit video (2–3 min)</span></div>
+      <div class="sb-step"><span class="snum">2</span><span>📝 Open the Google Form for your event</span></div>
+      <div class="sb-step"><span class="snum">3</span><span>📤 Fill details &amp; submit before deadline</span></div>
+      <div class="sb-step"><span class="snum">4</span><span>⚖️ Await results — judges' call is final</span></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="frainbow"></span>
+  <strong>National Engineering College</strong><br/>
+  K.R. Nagar, Kovilpatti – 628 503, Tamil Nadu<br/>
+  An Autonomous Institution – Affiliated to Anna University, Chennai &nbsp;|&nbsp; Estd. 1984<br/><br/>
+  <strong>Fine Arts Club</strong> &nbsp;◆&nbsp; Virtual Kala Fest'26 &nbsp;◆&nbsp; Online Competition
+</footer>
+
+<script>
+(function(){
+  const cv=document.getElementById('confetti'),ctx=cv.getContext('2d');
+  let W,H;
+  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  const shapes=['circle','rect','triangle'];
+  const cols=['#e8293b','#f97316','#f5c518','#22c55e','#2563eb','#7c3aed','#ec4899','#0d9488'];
+  const ps=Array.from({length:38},()=>({
+    x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+    shape:shapes[Math.floor(Math.random()*shapes.length)],
+    color:cols[Math.floor(Math.random()*cols.length)],
+    size:5+Math.random()*9,
+    vx:(Math.random()-0.5)*0.3,vy:-(0.2+Math.random()*0.45),
+    rot:Math.random()*Math.PI*2,vrot:(Math.random()-0.5)*0.018,
+    alpha:0.055+Math.random()*0.09,
+  }));
+  (function loop(){
+    ctx.clearRect(0,0,W,H);
+    for(const p of ps){
+      p.x+=p.vx;p.y+=p.vy;p.rot+=p.vrot;
+      if(p.y<-20){p.y=H+20;p.x=Math.random()*W;}
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);
+      ctx.globalAlpha=p.alpha;ctx.fillStyle=p.color;
+      if(p.shape==='circle'){ctx.beginPath();ctx.arc(0,0,p.size,0,Math.PI*2);ctx.fill();}
+      else if(p.shape==='rect'){ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.7);}
+      else{ctx.beginPath();ctx.moveTo(0,-p.size);ctx.lineTo(p.size*0.87,p.size*0.5);ctx.lineTo(-p.size*0.87,p.size*0.5);ctx.closePath();ctx.fill();}
+      ctx.restore();
+    }
+    requestAnimationFrame(loop);
+  })();
+})();
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const cards=[...document.querySelectorAll('.ev-card')];
+    const idx=cards.indexOf(e.target);
+    setTimeout(()=>e.target.classList.add('visible'),idx>=0?idx*90:0);
+    obs.unobserve(e.target);
+  });
+},{threshold:0.08});
+document.querySelectorAll('.ev-card,#rules-box,#sb').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
